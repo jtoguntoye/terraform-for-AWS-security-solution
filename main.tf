@@ -74,7 +74,7 @@ module "guardduty_sns_topic" {
 module "guardduty_eventbridge_rule" {
   source =  "./modules/eventbridge"
   sns_topic_arn = module.guardduty_sns_topic.sns_topic_arn
-  
+  lambda_remediation_function_arn = module.lambda.lambda_remediation_function_arn
 }
 
 module "lambda" {

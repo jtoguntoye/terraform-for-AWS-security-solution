@@ -67,3 +67,12 @@ resource "aws_cloudwatch_event_rule" "Guardduty-Event-IAMUser-MaliciousIPCaller"
      input_template = "\"GuardDuty Finding also for re:Inforce 2022 | ID:<gdid> | AWS Region:<region>. An AWS API operation was invoked (userName: <userName>) from an IP address that is included on your threat list and should be investigated.Go to https://console.aws.amazon.com/guardduty/home?region=<region>#/findings?macros=current&fId=<gdid>\""
    }
  }
+
+ #Event target resource for lambda remediation function
+
+ resource "aws_cloudwatch_event_target" "lambda_function_target" {
+   rule =  aws_cloudwatch_event_rule.Guardduty-Event-IAMUser-MaliciousIPCaller.name
+   target_id = "Guardduty-finding-lambda-remediation"
+
+   arn =  var.lambda_remediation_function_arn
+ }
