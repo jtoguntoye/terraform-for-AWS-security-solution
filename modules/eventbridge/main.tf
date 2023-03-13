@@ -73,6 +73,5 @@ resource "aws_cloudwatch_event_rule" "Guardduty-Event-IAMUser-MaliciousIPCaller"
  resource "aws_cloudwatch_event_target" "lambda_function_target" {
    rule =  aws_cloudwatch_event_rule.Guardduty-Event-IAMUser-MaliciousIPCaller.name
    target_id = "Guardduty-finding-lambda-remediation"
-
    arn =  var.lambda_remediation_function_arn
  }
